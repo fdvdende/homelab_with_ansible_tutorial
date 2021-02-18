@@ -1,3 +1,4 @@
+# Restart of SSH service
 - name: restart_sshd
   service:
     name: sshd

@@ -1,5 +1,13 @@
-apache_package_name: apache2
-apache_service: apache2
-php_package_name: libapache2-mod-php
+---
+branch: main
+
+ssh_port: 22
 ssh_users: "ferry simone"
 ssh_template_file: sshd_config_ubuntu.j2
+
+# platform-specific
+
+
+# workstation
+unattended_upgrades: true
+default: true

@@ -1,3 +1,4 @@
+# Install apache based upon OS variable
 - name: install apache and php packages
   tags: apache,httpd,php
   package:
@@ -5,7 +6,8 @@
       - "{{ apache_package_name }}"
       - "{{ php_package_name }}"
     state: latest
-    
+
+# Start the apache service
 - name: start and enable apache service
   tags: apache,httpd
   service:
@@ -13,6 +15,7 @@
     state: started
     enabled: yes
 
+# Change the Server admin email adress in the apache config file
 - name: change e-mail address for admin
   tags: apache,centos,httpd
   lineinfile:
@@ -22,6 +25,7 @@
   when: ansible_distribution == "CentOS"
   notify: restart_apache
 
+# Upload a basic default site
 - name: copy html file for site
   tags: apache,apache,apache2,httpd
   copy:
