@@ -12,8 +12,7 @@
 
     - name: update repo cache (CentOS)
       tags: always
-      dnf:
-        update_cache: yes
+      dnf: update_cache=yes
       changed_when: false
       when: ansible_distribution == "CentOS"
 
