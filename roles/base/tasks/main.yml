@@ -3,6 +3,12 @@
     user: simone
     key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA4EnhBiJD6ot/zkxcup0yNAN3xzzTDsRwar5eZp+Ygl ansible"
 
+- name: add ssh key for ferry
+  tags: always
+  authorized_key:
+    user: ferry
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOZb9rc8ZbCyj9s4gaJJ/G/QpXZVeiq13NymLrYIrhoY ferry default"
+
 - name: generate sshd_config file from template
   tags: ssh
   template:
