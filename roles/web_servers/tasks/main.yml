@@ -1,3 +1,8 @@
+# Load distro-specific variables
+- include_vars: "{{ ansible_distribution }}.yml"
+  tags: always
+
+# Main of web_servers
 - name: install apache and php packages
   tags: apache,httpd,php
   package:
@@ -25,8 +30,12 @@
 - name: copy html file for site
   tags: apache,apache,apache2,httpd
   copy:
-    src: default_site.html
+    src: website-main-page/default_site.html
     dest: /var/www/html/index.html
     owner: root
     group: root
     mode: 0644
+  
+- block:
+  - import_tasks: ufw.yml
+    when: ansible_distribution in ["Debian", "Ubuntu"]

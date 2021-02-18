@@ -1,0 +1,17 @@
+# Load distro-specific variables
+- include_vars: "{{ ansible_distribution }}.yml"
+  tags: always
+
+# Main of common_servers
+- name: add ssh key for ferry
+  tags: always
+  authorized_key:
+    user: ferry
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOZb9rc8ZbCyj9s4gaJJ/G/QpXZVeiq13NymLrYIrhoY ferry default"
+
+- block:
+  - include_tasks: unattended_upgrades.yml
+    when:
+      - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+      - unattended_upgrades is defined
+      - unattended_upgrades == true

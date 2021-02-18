@@ -1,0 +1,2 @@
+ssh_users: "ferry simone"
+ssh_template_file: sshd_config_centos.j2

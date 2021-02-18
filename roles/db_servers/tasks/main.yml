@@ -1,3 +1,8 @@
+# Load distro-specific variables
+- include_vars: "{{ ansible_distribution }}.yml"
+  tags: always
+
+# Main of db_servers
 - name: install mariadb package (CentOS)
   tags: centos,db,mariadb
   dnf:
