@@ -1,40 +1,49 @@
 ---
-
+# tasks to complete before making targets part of the ansible thing
 - hosts: all
   become: true
   pre_tasks:
 
-  - name: install updates (CentOS)
-    tags: always
-    dnf:
-      update_only: yes
-      update_cache: yes
-    when: ansible_distribution == "CentOS"
+    - name: pre-run | update package cache (arch)
+      tags: always
+      pacman: update_cache=yes
+      changed_when: False
+      when: ansible_distribution == "Archlinux"
 
-  - name: install updates (Ubuntu)
-    tags: always
-    apt:
-      upgrade: dist
-      update_cache: yes
-    when: ansible_distribution == "Ubuntu"
+    - name: update repo cache (CentOS)
+      tags: always
+      dnf:
+        update_cache: yes
+      changed_when: false
+      when: ansible_distribution == "CentOS"
+
+    - name: pre-run | update package cache (debian and Ubuntu)
+      tags: always
+      apt: update_cache=yes
+      changed_when: False
+      when: ansible_distribution in ["Debian", "Ubuntu"]
 
 
+# Making the Ansible connection for control
 - hosts: all
   become: true
   tasks:
 
+# Create the ansible user
   - name: create simone user
     tags: always
     user:
       name: simone
       groups: root
 
+# Add the ssh key for the ansible user
   - name: add ssh key for simone
     tags: always
     authorized_key:
       user: simone
       key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA4EnhBiJD6ot/zkxcup0yNAN3xzzTDsRwar5eZp+Ygl ansible"
 
+# Make the ansible user apart of de sudoers group
   - name: add sudoers file for simone
     tags: always
     copy:

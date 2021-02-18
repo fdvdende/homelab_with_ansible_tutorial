@@ -8,5 +8,5 @@ ssh_template_file: sshd_config_ubuntu.j2
 # platform-specific
 
 # workstation
-unattended_upgrades: true
+unattended_upgrades: false
 default: true
