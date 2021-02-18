@@ -1,11 +1,11 @@
 - name: unattended upgrades | install unattended-upgrades for debian-based hosts
   tags: packages,unattended,updates,upgrades
   package:
-    state: latest
     name:
       - unattended-upgrades
+    state: latest
   when: ansible_distribution in ['Debian', 'Ubuntu']
-
+ 
 - name: unattended upgrades | copy 20auto-upgrades file for debian-based hosts
   tags: packages,unattended,updates,upgrades
   copy:

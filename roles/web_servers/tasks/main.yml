@@ -17,6 +17,9 @@
     name: "{{ apache_service }}"
     state: started
     enabled: yes
+#  when:
+#    - "{{ apache_service }} is defined"
+#    - "{{ apache_service }} == true"
 
 - name: change e-mail address for admin
   tags: apache,centos,httpd
@@ -24,7 +27,10 @@
     path: /etc/httpd/conf/httpd.conf
     regexp: '^ServerAdmin'
     line: ServerAdmin ferry@homelab.local
-  when: ansible_distribution == "CentOS"
+  when: 
+    - ansible_distribution == "CentOS"
+#    - "{{ apache_service }} is defined"
+#    - "{{ apache_service }} == true"
   notify: restart_apache
 
 - name: copy html file for site
@@ -35,6 +41,9 @@
     owner: root
     group: root
     mode: 0644
+#  when:
+#    - "{{ apache_service }} is defined"
+#    - "{{ apache_service }} == true"
   
 - block:
   - import_tasks: ufw.yml

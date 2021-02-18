@@ -1,0 +1,37 @@
+- name: Install docker dependencies
+  apt:
+    name: "{{item}}"
+    state: present
+    update_cache: yes
+  loop:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg-agent
+    - software-properties-common
+
+- name: add the repo GPG
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+
+- name: Set up stable repository docker
+  apt_repository:
+    repo: deb https://download.docker.com/linux/debian $(lsb_release -cs) stable
+    state: present
+
+- name: install docker
+  apt:
+    name: "{{item}}"
+    state: latest
+    update_cache: yes
+  loop:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+
+- name: Set the service to started state and make this default
+  service:
+    name: docker
+    state: started
+    enabled: yes
