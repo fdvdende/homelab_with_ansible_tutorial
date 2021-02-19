@@ -1,5 +1,5 @@
 # Install Samba package
-- name: Software | install samba package (Debian and Ubuntu)
+- name: Software | Samba | install samba package (Debian and Ubuntu)
   tags: samba
   package:
     name: samba
@@ -10,11 +10,12 @@
     - samba == true
 
 # Uninstall Samba package
-- name: Software | uninstall samba package (Debian and Ubuntu)
+- name: Software | Samba | uninstall samba package (Debian and Ubuntu)
   tags: samba
   package:
     name: samba
     state: absent
+    purge: yes
   when:
     - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
     - samba is defined

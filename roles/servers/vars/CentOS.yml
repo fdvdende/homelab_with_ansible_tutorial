@@ -1,4 +1,6 @@
 # Apache Variables
 apache_package_name: httpd
+apache_package_location: /etc/httpd/
+apache_web_location: /var/www/
 apache_service: httpd
 php_package_name: php

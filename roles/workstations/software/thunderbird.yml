@@ -1,0 +1,19 @@
+# Install Thunderbird package
+- name: software | thunderbird | install package
+  tags: packages,flatpak,thunderbird,workstation-packages
+  become_user: jay
+  flatpak:
+    name: org.mozilla.thunderbird
+    method: user
+    state: present
+  when: thunderbird is defined and thunderbird == true
+
+# Remove Thunderbird package
+- name: software | thunderbird | remove package
+  tags: packages,flatpak,thunderbird,workstation-packages
+  become_user: jay
+  flatpak:
+    name: org.mozilla.thunderbird
+    method: user
+    state: absent
+  when: thunderbird is defined and thunderbird == false

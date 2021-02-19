@@ -1,0 +1,19 @@
+# Install Libreoffice package
+- name: software | libreoffice | install package
+  tags: packages,flatpak,libreoffice,workstation-packages
+  become_user: ferry
+  flatpak:
+    name: org.libreoffice.LibreOffice
+    method: user
+    state: present
+  when: libreoffice is defined and libreoffice == true
+
+# Remove Libreoffice package
+- name: software | libreoffice | remove package
+  tags: packages,flatpak,libreoffice,workstation-packages
+  become_user: ferry
+  flatpak:
+    name: org.libreoffice.LibreOffice
+    method: user
+    state: absent
+  when: libreoffice is defined and libreoffice == false

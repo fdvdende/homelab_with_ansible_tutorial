@@ -1,0 +1,19 @@
+# Install Spotify package
+- name: software | spotify | install package
+  tags: packages,flatpak,spotify,workstation-packages
+  become_user: ferry
+  flatpak:
+    name: com.spotify.Client
+    method: user
+    state: present
+  when: spotify is defined and spotify == true
+
+# Remove Spotify package
+- name: software | spotify | remove package
+  tags: packages,flatpak,spotify,workstation-packages
+  become_user: ferry
+  flatpak:
+    name: com.spotify.Client
+    method: user
+    state: absent
+  when: spotify is defined and spotify == false

@@ -1,4 +1,8 @@
 # Apache Variables
 apache_package_name: apache2
+apache_package_data: apache2-data
+apache_package_utils: pache2-utils
+apache_package_location: /etc/apache2/
+apache_web_location: /var/www/
 apache_service: apache2
 php_package_name: libapache2-mod-php

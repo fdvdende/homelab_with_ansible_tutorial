@@ -1,0 +1,55 @@
+---
+branch: master
+
+# ssh file setup
+#ssh_port: 22
+#ssh_users: "ferry simone"
+#ssh_template_file: sshd_config_ubuntu.j2
+
+# Belowe are swithes for platform specific stuff
+# To check if it is present and/or install set to true
+# To check if it is absent and/or install set to false
+
+# platform-specific
+#ansible_python_interpreter: /usr/bin/python3
+#microcode_amd_install: false
+#microcode_intel_install: true
+
+# app defaults
+gui_editor: gvim
+terminal_emulator: terminator
+web_browser: flatpak run org.mozilla.firefox
+
+# application selection
+#audacity: true
+#authy: true
+#autofs: true
+#chromium: true
+#darktable: true
+firefox: true
+#foliate: true
+#games: true
+#glimpse: true
+#keepassxc: true
+libreoffice: true
+#lutris: true
+#mattermost: true
+minecraft: true
+#packer: true
+#signal: true
+spotify: true
+steam: true
+#syncthing: true
+#terraform: true
+thunderbird: true
+#todoist: true
+#ulauncher: false
+#vagrant: true
+virtualbox: true
+#vivaldi: true
+vlc: true
+#xonotic: true
+
+# desktop environment selection
+#gnome: true
+#mate: false

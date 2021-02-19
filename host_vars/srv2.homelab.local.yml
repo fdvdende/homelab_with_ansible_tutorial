@@ -23,7 +23,8 @@ raspberry_pi: false
 
 # server software
 apache: false
-mariadb: true
+apache_default_site: false
+mariadb: false
 samba: false
 
 # server maintenance

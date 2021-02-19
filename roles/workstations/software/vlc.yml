@@ -1,0 +1,23 @@
+# Install VLC package
+- name: software | vlc | install package
+  tags: packages,flatpak,vlc,workstation-packages
+  become_user: ferry
+  flatpak:
+    name: org.videolan.VLC
+    method: user
+    state: present
+  when:
+    - vlc is defined
+    - vlc == true
+
+# Remove VLC package
+- name: software | vlc | remove package
+  tags: packages,flatpak,vlc,workstation-packages
+  become_user: ferry
+  flatpak:
+    name: org.videolan.VLC
+    method: user
+    state: absent
+  when:
+    - vlc is defined
+    - vlc == true

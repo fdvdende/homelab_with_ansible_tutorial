@@ -1,0 +1,73 @@
+# Install apache based upon OS variable
+- name: Software | Apache | install apache and php packages
+  tags: apache,httpd,php
+  package:
+    name:
+      - "{{ apache_package_name }}"
+      - "{{ php_package_name }}"
+    state: latest
+  when:
+    - apache is defined
+    - apache == true
+
+# Uninstall apache based upon OS variable and purging remaining files
+- name: Software | Apache | uninstall apache and php packages and purging remaining files
+  tags: apache,httpd,php
+  package:
+    name:
+      - "{{ apache_package_name }}"
+      - "{{ php_package_name }}"
+      - "{{ apache_package_data }}"
+      - "{{ apache_package_utils }}"
+    state: absent
+    purge: yes
+  when:
+    - apache is defined
+    - apache == false
+
+# Start the apache service
+- name: Software | Apache | start and enable apache service if present
+  tags: apache,httpd
+  service:
+    name: "{{ apache_service }}"
+    state: started
+    enabled: yes
+  when:
+    - apache is defined
+    - apache == true
+
+# Change the Server admin email adress in the apache config file
+- name: Software | Apache | change e-mail address for admin when apache is present
+  tags: apache,centos,httpd
+  lineinfile:
+    path: /etc/httpd/conf/httpd.conf
+    regexp: '^ServerAdmin'
+    line: ServerAdmin ferry@homelab.local
+  when: 
+    - ansible_distribution == "CentOS"
+    - apache is defined
+    - apache == true
+  notify: restart_apache
+
+# Upload a basic default site
+- name: Software | Apache | copy defaul html file for site
+  tags: apache,apache,apache2,httpd
+  copy:
+    src: homepage-default/default_site.html
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: 0644
+  when:
+    - apache_default_site is defined
+    - apache == true
+    - apache_default_site == true
+
+# Check for basic default site file and if present remove its content
+#- name: Software | Apache | remove default html file for site if present
+#  file:
+#    path: /var/www/html/index.html
+#    state: absent
+#  when:
+#    - apache is defined
+#    - apache_default_site == false

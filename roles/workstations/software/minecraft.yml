@@ -1,0 +1,19 @@
+# Install Minecraft package
+- name: software | minecraft | install package
+  tags: packages,flatpak,games,minecraft,workstation-packages
+  become_user: ferry
+  flatpak:
+    name: com.mojang.Minecraft
+    method: user
+    state: present
+  when: minecraft is defined and minecraft == true
+
+# Remove Minecraft package
+- name: software | minecraft | remove package
+  tags: packages,flatpak,games,minecraft,workstation-packages
+  become_user: ferry
+  flatpak:
+    name: com.mojang.Minecraft
+    method: user
+    state: absent
+  when: minecraft is defined and minecraft == false

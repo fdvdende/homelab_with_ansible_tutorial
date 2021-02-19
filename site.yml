@@ -33,11 +33,6 @@
   become: true
   roles:
     - servers
-  
-- hosts: web_servers
-  become: true
-  roles:
-    - web_servers
 
 
 # end of run cleanup and reporting

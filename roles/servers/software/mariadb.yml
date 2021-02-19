@@ -1,5 +1,5 @@
 # Install Maria Database package
-- name: Software | install mariadb package (CentOS)
+- name: Software | MariaDB | install mariadb package (CentOS)
   tags: centos,db,mariadb
   dnf:
     name: mariadb
@@ -10,7 +10,7 @@
     - mariadb == true
 
 # Install Maria Database package
-- name: Software | install mariadb package (Debian and Ubuntu)
+- name: Software | MariaDB | install mariadb package (Debian and Ubuntu)
   tags: db,mariadb,ubuntu
   apt:
     name: mariadb-server
@@ -21,22 +21,24 @@
     - mariadb == true
 
 # Unistall Maria Database package
-- name: Software | uninstall mariadb package (CentOS)
+- name: Software | MariaDB | uninstall mariadb package (CentOS)
   tags: centos,db,mariadb
   dnf:
     name: mariadb
     state: absent
+    purge: yes
   when: 
     - ansible_distribution == "CentOS"
     - mariadb is defined
     - mariadb == false
 
 # Uninstall Maria Database package
-- name: Software | uninstall mariadb package (Debian and Ubuntu)
+- name: Software | MariaDB | uninstall mariadb package (Debian and Ubuntu)
   tags: db,mariadb,ubuntu
   apt:
     name: mariadb-server
     state: absent
+    purge: yes
   when: 
     - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
     - mariadb is defined

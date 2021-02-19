@@ -5,9 +5,9 @@
 - block:
  # install software for different roles if defined with true in host_vars file the software is installed. 
  # If it is defined with false then uninstall will be run
+  - import_tasks: software/apache.yml
   - import_tasks: software/mariadb.yml
   - import_tasks: software/samba.yml
-#  - import_tasks: software/apache.yml
 
   - include_tasks: system_setup/unattended_upgrades.yml
     when:

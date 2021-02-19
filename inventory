@@ -1,7 +1,5 @@
-[web_servers]
-srv3.homelab.local
-
 [servers]
 srv1.homelab.local
 srv2.homelab.local
+srv3.homelab.local
 srv4.homelab.local

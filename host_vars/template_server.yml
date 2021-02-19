@@ -2,9 +2,9 @@
 branch: main
 
 # ssh file setup
-ssh_port: 22
-ssh_users: "ferry simone"
-ssh_template_file: sshd_config_ubuntu.j2
+#ssh_port: 22
+#ssh_users: "ferry simone"
+#ssh_template_file: sshd_config_ubuntu.j2
 
 # Belowe are swithes for platform specific stuff
 # To check if it is present and/or install set to true
@@ -23,6 +23,7 @@ raspberry_pi: false
 
 # server software
 apache: false
+apache_default_site: false
 mariadb: false
 samba: false
 

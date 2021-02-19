@@ -1,14 +1,18 @@
-# Install Unzip package
-- name: install unzip
-  package:
-    name: unzip
+# Load distro-specific variables
+- include_vars: "{{ ansible_distribution }}.yml"
+  tags: always
 
-# install Terraform Package
-- name: install terraform
-  unarchive:
-    src: https://releases.hashicorp.com/terraform/0.14.7/terraform_0.14.7_linux_amd64.zip
-    dest: /usr/local/bin
-    remote_src: yes
-    mode: 0755
-    owner: root
-    group: root
+- block:
+ # install software for different roles if defined with true in host_vars file the software is installed. 
+ # If it is defined with false then uninstall will be run
+
+  ## system setup
+  - import_tasks: system_setup/tweaks.yml
+
+  ## install software
+  - import_tasks: software/bitwarden.yml
+  - import_tasks: software/google_chrome.yml
+  - import_tasks: software/libreoffice.yml
+  - import_tasks: software/spotify.yml
+  - import_tasks: software/steam.yml
+  - import_tasks: software/vlc.yml

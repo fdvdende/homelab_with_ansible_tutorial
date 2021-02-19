@@ -23,8 +23,9 @@ raspberry_pi: false
 
 # server software
 apache: false
+apache_default_site: false
 mariadb: false
-samba: true
+samba: false
 
 # server maintenance
 unattended_upgrades: false
