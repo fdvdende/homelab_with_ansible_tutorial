@@ -4,7 +4,7 @@
   become: true
   pre_tasks:
 
-    - name: pre-run | update package cache (arch)
+    - name: pre-run | update package cache (Arch)
       tags: always
       pacman: update_cache=yes
       changed_when: False
@@ -16,7 +16,7 @@
       changed_when: false
       when: ansible_distribution == "CentOS"
 
-    - name: pre-run | update package cache (debian and Ubuntu)
+    - name: pre-run | update package cache (Debian and Ubuntu)
       tags: always
       apt: update_cache=yes
       changed_when: False
@@ -29,39 +29,29 @@
   roles:
     - base
       
-- hosts: workstations
+- hosts: servers
   become: true
   roles:
-    - workstations
+    - servers
   
 - hosts: web_servers
   become: true
   roles:
     - web_servers
 
-- hosts: db_servers
-  become: true
-  roles:
-    - db_servers
-
-- hosts: file_servers
-  become: true
-  roles:
-    - file_servers
-
 
 # end of run cleanup and reporting
 - hosts: all
   become: true
   tasks:
-  - name: post-run | cleanup package cache (debian and ubuntu)
+  - name: post-run | cleanup package cache (Debian and Ubuntu)
     tags: always
     apt:
       autoclean: yes
     changed_when: false
     when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
 
-  - name: post-run | autoremove orphan packages (debian and ubuntu)
+  - name: post-run | autoremove orphan packages (Debian and Ubuntu)
     tags: always
     apt:
       autoremove: yes

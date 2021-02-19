@@ -1,21 +1,21 @@
 # Install Samba package
-- name: install samba package (debian and Ubuntu)
+- name: Software | install samba package (Debian and Ubuntu)
   tags: samba
   package:
     name: samba
     state: latest
   when:
     - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
-    - file_server is defined
-    - file_server == true
+    - samba is defined
+    - samba == true
 
 # Uninstall Samba package
-- name: uninstall samba package (debian and Ubuntu)
+- name: Software | uninstall samba package (Debian and Ubuntu)
   tags: samba
   package:
     name: samba
-    state: latest
+    state: absent
   when:
     - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
-    - file_server is defined
-    - file_server == false
+    - samba is defined
+    - samba == false

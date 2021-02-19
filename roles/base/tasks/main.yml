@@ -1,3 +1,7 @@
+# Load distro-specific variables
+- include_vars: "{{ ansible_distribution }}.yml"
+  tags: always
+
 # add ssh key for ansible user
 - name: add ssh key for simone
   authorized_key:
