@@ -6,6 +6,7 @@
  # install software for different roles if defined with true in host_vars file the software is installed. 
  # If it is defined with false then uninstall will be run
   - import_tasks: software/apache.yml
+  - import_tasks: software/docker.yml
   - import_tasks: software/mariadb.yml
   - import_tasks: software/samba.yml
 

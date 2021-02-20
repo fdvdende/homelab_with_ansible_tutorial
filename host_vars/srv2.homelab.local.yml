@@ -24,6 +24,8 @@ raspberry_pi: false
 # server software
 apache: false
 apache_default_site: false
+docker: false
+docker_default_container: false
 mariadb: false
 samba: false
 

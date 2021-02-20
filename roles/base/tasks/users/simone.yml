@@ -1,0 +1,9 @@
+# add public ssh key for ansible homelab user
+- name: users | simone | add public key
+  tags: dotfiles,simone,ssh,ssh-keys,users
+  authorized_key:
+    user: simone
+    state: present
+    key: "{{ item }}"
+  with_file:
+    - /home/ferry/.ssh/ansible.pub

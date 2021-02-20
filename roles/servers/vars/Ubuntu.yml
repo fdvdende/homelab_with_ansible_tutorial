@@ -6,3 +6,9 @@ apache_package_location: /etc/apache2/
 apache_web_location: /var/www/
 apache_service: apache2
 php_package_name: libapache2-mod-php
+
+# Docker Variables
+docker_create_containers: 1
+docker_default_container_name: docker
+docker_default_container_image: ubuntu
+docker_default_container_command: sleep 1d

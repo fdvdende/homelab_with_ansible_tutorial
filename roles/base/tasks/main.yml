@@ -2,18 +2,10 @@
 - include_vars: "{{ ansible_distribution }}.yml"
   tags: always
 
-# add public ssh key for ansible homelab user
-- name: users | simone | add public key
-  authorized_key:
-    user: simone
-    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA4EnhBiJD6ot/zkxcup0yNAN3xzzTDsRwar5eZp+Ygl ansible"
-
-# add public ssh key for personal homelab account
-- name: users | ferry | add public key
-  tags: always
-  authorized_key:
-    user: ferry
-    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOZb9rc8ZbCyj9s4gaJJ/G/QpXZVeiq13NymLrYIrhoY ferry default"
+- block:
+  # Make sure users exist on the system
+  - import_tasks: users/simone.yml
+  - import_tasks: users/ferry.yml
 
 # update sshd file from template
 - name: setup | sshd | setting up sshd based upon template
