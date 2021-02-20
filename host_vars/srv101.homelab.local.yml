@@ -1,0 +1,33 @@
+---
+branch: main
+
+# ssh file setup
+#ssh_port: 22
+#ssh_users: "ferry simone"
+#ssh_template_file: sshd_config_ubuntu.j2
+
+# Belowe are swithes for platform specific stuff
+# To check if it is present and/or install set to true
+# To check if it is absent and/or install set to false
+
+# platform-specific
+linode_instance: false
+microcode_amd_install: false
+microcode_intel_install: false
+proxmox_instance: false
+raspberry_pi: false
+
+# Belowe are swithes for specific software
+# To check if it is present and/or install set to true
+# To check if it is absent and/or install set to false
+
+# server software
+apache: false
+apache_default_site: false
+docker: false
+docker_default_container: false
+mariadb: false
+samba: false
+
+# server maintenance
+unattended_upgrades: false

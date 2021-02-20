@@ -1,5 +1,9 @@
 [servers]
+# Lab testing for testing
 srv1.homelab.local
 srv2.homelab.local
 srv3.homelab.local
 srv4.homelab.local
+
+# Semi production
+srv101.homelab.local

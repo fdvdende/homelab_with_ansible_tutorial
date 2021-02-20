@@ -8,11 +8,11 @@
   with_file:
     - /home/ferry/.ssh/id_ed25519.pub
 
-- name: users | ferry | remove old public key
+- name: users | ferry | add second public key
   tags: dotfiles,ferry,ssh,ssh-keys,users
   authorized_key:
     user: ferry
-    state: absent
+    state: present
     key: "{{ item }}"
   with_file:
     - /home/ferry/.ssh/ansible.pub
