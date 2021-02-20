@@ -1,7 +1,7 @@
 ---
 # tasks to complete before making targets part of the ansible thing
 # Copy first ssh key over to root account with: ssh-copy-id -i ~/.ssh/ansible.pub srv<number>.homelab.local
-# Then run run with --ask-become-pass -u <user> bootstrap.yml
+# Then run run with --ask-become-pass -i bootstrap_hosts -u <user> bootstrap.yml
 - hosts: all
   become: true
   pre_tasks:
