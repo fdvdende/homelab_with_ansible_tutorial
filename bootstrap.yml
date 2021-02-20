@@ -36,21 +36,21 @@
   tasks:
 
 # Create the ansible user
-  - name: create simone user
+  - name: users | simone | create user
     tags: always
     user:
       name: simone
       groups: root
 
 # Add the ssh key for the ansible user
-  - name: add ssh key for simone
+  - name: users | simone | add public key
     tags: always
     authorized_key:
       user: simone
       key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA4EnhBiJD6ot/zkxcup0yNAN3xzzTDsRwar5eZp+Ygl ansible"
 
 # Make the ansible user apart of de sudoers group
-  - name: add sudoers file for simone
+  - name: users | simone | add simone to sudoers file
     tags: always
     copy:
       src: sudoer_simone
