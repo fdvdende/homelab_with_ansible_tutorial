@@ -19,14 +19,19 @@ raspberry_pi: false
 
 # Belowe are swithes for specific software
 # To check if it is present and/or install set to true
-# To check if it is absent and/or install set to false
+# To check if it is absent and/or uninstall set to false
 
 # server software
 apache: false
 apache_default_site: false
+
 docker: false
+docker_compose: false
+docker_python: false
 docker_default_container: false
+
 mariadb: false
+
 samba: false
 
 # server maintenance

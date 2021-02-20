@@ -1,0 +1,118 @@
+# Install docker dependencies 
+- name: Software | Docker | Install required system packages for Docker
+  tags: docker,container
+  apt: name={{ item }} state=latest update_cache=yes
+  loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'gnupg-agent', 'software-properties-common']
+  when: 
+    - ansible_distribution in ["Debian", "Ubuntu"]
+    - docker is defined
+    - docker == true
+
+# Add Docker’s official GPG key
+- name: Software | Docker | Add Docker GPG apt Key
+  tags: docker,container
+  apt_key:
+    url: "{{ docker_gpg_key }}"
+    state: present
+  when: 
+    - ansible_distribution in ["Debian", "Ubuntu"]
+    - docker is defined
+    - docker == true
+
+# Set up the official stable repository of Docker
+- name: Software | Docker | Add Docker Repository
+  tags: docker,container
+  become: true
+  apt_repository:
+    repo: "{{ docker_repository }}"
+    state: present
+  when: 
+    - ansible_distribution in ["Debian", "Ubuntu"]
+    - docker is defined
+    - docker == true
+
+# Install docker Engine
+- name: Software | Docker | Update apt and install docker-ce (include docker-ce-cli & ontainerd.io)
+  tags: docker,container
+  apt: 
+    update_cache: yes
+    name: docker-ce
+    state: latest
+  when: 
+    - ansible_distribution in ["Debian", "Ubuntu"]
+    - docker is defined
+    - docker == true
+
+# Install docker compose
+- name: Software | Docker Compose | Install Docker Compose
+  tags: docker,docker_compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64
+    dest: "{{ docker_compose_path }}"
+    mode: 0755
+  when: 
+    - ansible_distribution in ["Debian", "Ubuntu"]
+    - docker_compose is defined
+    - docker_compose == true
+
+
+# Uninstall docker Engine
+- name: Software | Docker | Uninstall docker-ce & docker-ce-cli & containerd.io
+  tags: docker,container
+  apt: name={{ item }} state=absent purge=yes
+  loop: ['docker-ce', 'docker-ce-cli', 'containerd.io']
+  when: 
+    - ansible_distribution in ["Debian", "Ubuntu"]
+    - docker is defined
+    - docker == false
+
+
+# Remove Docker’s official GPG key
+#- name: Software | Docker | Remove Docker GPG apt Key
+#  tags: docker,container
+#  apt_key:
+#    url: "{{ docker_gpg_key }}"
+#    state: absent
+#  when: 
+#    - ansible_distribution in ["Debian", "Ubuntu"]
+#    - docker is defined
+#    - docker == false
+
+# Remove the official stable repository of Docker
+- name: Software | Docker | Remove Docker Repository
+  tags: docker,container
+  become: true
+  apt_repository:
+    repo: "{{ docker_repository }}"
+    state: absent
+  when: 
+    - ansible_distribution in ["Debian", "Ubuntu"]
+    - docker is defined
+    - docker == false
+
+# Uninstall docker folders
+- name: Software | Docker | Remove remaining images, containers, volumes, or customized configuration files
+  tags: docker,container
+  become: true
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /var/lib/docker
+    - /var/lib/containerd
+
+  when: 
+    - ansible_distribution in ["Debian", "Ubuntu"]
+    - docker is defined
+    - docker == false
+
+# Uninstall docker compose
+- name: Software | Docker Compose | Uninstall Docker Compose
+  tags: docker,docker_compose
+  file:
+    path: /usr/local/bin/docker-compose
+    state: absent
+  when: 
+    - ansible_distribution in ["Debian", "Ubuntu"]
+    - docker_compose is defined
+    - docker_compose == false

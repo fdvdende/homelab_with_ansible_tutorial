@@ -1,0 +1,19 @@
+# Install docker dependencies 
+- name: Software | Docker | Install required system packages for Docker
+  tags: docker,ansible,python
+  apt: name={{ item }} state=latest update_cache=yes
+  loop: [ 'python3-pip', 'virtualenv', 'python3-setuptools']
+  when: 
+    - ansible_distribution == "Ubuntu"
+    - docker_python is defined
+    - docker_python == true
+
+# Add the docker mudule so that ansible can manage Docker
+- name: Software | Docker | Install Docker Module for Python
+  tags: docker,ansible,python
+  pip:
+    name: docker
+  when: 
+    - ansible_distribution == "Ubuntu"
+    - docker_python is defined
+    - docker_python == true
