@@ -5,5 +5,6 @@ srv2.homelab.local
 srv3.homelab.local
 srv4.homelab.local
 
-# Semi production
+[server_excluded]
+# only base role are allowed for these servers/machines
 srv101.homelab.local

@@ -13,6 +13,6 @@ docker_default_container_name: docker
 docker_default_container_image: ubuntu
 docker_default_container_command: sleep 1d
 docker_gpg_key: https://download.docker.com/linux/ubuntu/gpg
-docker_repository: deb https://download.docker.com/linux/ubuntu focal stable
+docker_repository: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
 docker_compose_version: 1.28.4
 docker_compose_path: /usr/local/bin/docker-compose
